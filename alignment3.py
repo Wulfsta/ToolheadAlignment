@@ -8,15 +8,15 @@ from scipy.stats import chi2
 
 def surface_function(x, y, params, bed_size):
     """
-    Evaluate scaled surface function: f(2*x/bed_size, 2*y/bed_size) + a6
+    Evaluate scaled surface function: f(x/bed_size, y/bed_size) + a6
     f(u,v) = a1*u^2 + a2*v^2 + a3*u*v + a4*u + a5*v + a6
     params = [a1, a2, a3, a4, a5, a6]
     """
     a1, a2, a3, a4, a5, a6 = params
 
     # Scale coordinates
-    u = 2 * x / bed_size
-    v = 2 * y / bed_size
+    u = x / bed_size
+    v = y / bed_size
 
     return a1 * u**2 + a2 * v**2 + a3 * u * v + a4 * u + a5 * v + a6
 
@@ -143,14 +143,6 @@ def run_default_workflow(gridx, gridy, bed_size, bed_distortion, bed_offset_x, b
     print(f"  Y offset: {y_offset_unified:.6f} (error: {abs(y_offset_unified - sim_offset_y):.6f})")
     print(f"  Optimization success: {opt_result.success}")
     print(f"  Final objective: {opt_result.fun:.8f}")
-    print()
-
-    # Theoretical vs fitted parameters
-    theoretical_a1 = bed_distortion / 2
-    theoretical_a2 = -bed_distortion / 2
-    print("Theoretical vs fitted parameters:")
-    print(f"  Theoretical: a1={theoretical_a1:.6f}, a2={theoretical_a2:.6f}")
-    print(f"  Fitted:      a1={surface_params_opt[0]:.6f}, a2={surface_params_opt[1]:.6f}")
     print()
 
     # Visualization of single example
