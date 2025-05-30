@@ -22,7 +22,7 @@ Let the samples from the reference surface be $S_{(u, v)}$ and the samples from 
 
 Minimize $\sum_{(u, v) \in G} \left(S_{(u, v)} - f(u, v)\right)^2 + \sum_{(u, v) \in G} \left(\hat{S}_{(u, v)} - \hat{f}(u, v)\right)^2$ with variables $x_0, x_1, y_0, y_1,$ and $a_i$ for $1<=i<=6$.
 
-The notation is a bit informal here, but we assume the bed mesh can be modeled by some offset quadratic function of six parameters, and attempt to fit the data from a bed mesh for each toolhead
+The notation is a bit informal here, but we assume the bed mesh can be modeled by some offset quadratic function, and attempt to fit the data from a bed mesh for each toolhead
 simultaneously to this quadratic as well as the offset between the toolheads. Once this minimization has been completed, we extract $x_1$ and $y_1$ to obtain the
 offset.
 
