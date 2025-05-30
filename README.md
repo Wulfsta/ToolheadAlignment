@@ -11,13 +11,19 @@ simulation of this technique are as follows:
 ## Algorithmic Approach
 
 Let the reference surface be represented by:
-$$f(x, y) = a_{1}\left(x-x_0\right)^2 + a_{2}\left(y-y_0\right)^2 + a_{3}\left(x-x_0\right)\left(y-y_0\right) + a_{4}\left(x-x_0\right) + a_{5}\left(y-y_0\right) + a_{6}$$
-Let the offset reference surface be represented by:
-$$f^{*}(x,y) = f\left(x-x_1, y-y_1\right)$$
-Minimize $\left{||}f - f^{*}\right{||}$ over the bed area with variables $x_0, x_1, y_0, y_1,$ and $a_i$ for $1<=i<=6$.
 
-That is, we assume the bed mesh can be modeled by some offset quadratic function of six variables, and attempt to fit the data from a bed mesh for each toolhead
-simultaneously to this quadratic and the offset between the toolheads. Once this minimization has been completed, we extract $x_1$ and $y_1$ to obtain the
+$$f(x, y) = a_{1} \left( x - x_{0} \right)^2 + a_{2}\left( y - y_{0} \right)^2 + a_{3} \left( x - x_{0} \right) \left( y - y_{0} \right) + a_{4} \left( x - x_{0} \right) + a_{5} \left( y - y_{0} \right) + a_{6}$$
+
+Let the offset reference surface be represented by:
+
+$$\hat{f}(x,y) = f\left( x - x_{1}, y - y_{1} \right)$$
+
+Let the samples from the reference surface be $S_{(u, v)}$ and the samples from the offset reference surface be $\hat{S}_{(u, v)}$ such that $(u, v)$ are vertices of a cartesian grid, $G$, within the reference surface.
+
+Minimize $\sum_{(u, v) \in G} \left(S_{(u, v)} - f(u, v)\right)^2 + \sum_{(u, v) \in G} \left(\hat{S}_{(u, v)} - \hat{f}(u, v)\right)^2$ with variables $x_0, x_1, y_0, y_1,$ and $a_i$ for $1<=i<=6$.
+
+The notation is a bit informal here, but we assume the bed mesh can be modeled by some offset quadratic function of six parameters, and attempt to fit the data from a bed mesh for each toolhead
+simultaneously to this quadratic as well as the offset between the toolheads. Once this minimization has been completed, we extract $x_1$ and $y_1$ to obtain the
 offset.
 
 The following example shows a simulated reference bed mesh, a simulated shifted bed mesh (offset by 0.8mm in each axis), a reference fitted surface, a shifted fitted
